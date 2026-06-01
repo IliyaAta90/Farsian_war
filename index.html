@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FARSIAN WAR Command Center v3</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&family=Orbitron:wght@500;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root{--gold:#d4af37;--gold2:#8a6a1f;}
+*{box-sizing:border-box}
+body{
+margin:0;padding:15px;
+font-family:'Vazirmatn',sans-serif;
+background:radial-gradient(circle at top,#3a2a08,#181818 25%,#090909);
+color:#fff;
+}
+.container{max-width:1000px;margin:auto}
+.panel{
+background:#141414;
+border:1px solid var(--gold2);
+border-radius:24px;
+padding:20px;
+box-shadow:0 0 30px rgba(212,175,55,.15);
+}
+.logo{
+font-family:'Orbitron',sans-serif;
+text-align:center;
+font-size:clamp(28px,5vw,46px);
+color:var(--gold);
+}
+.subtitle{text-align:center;color:#aaa;margin:10px 0 25px}
+label{display:block;margin:10px 0 6px;color:var(--gold);font-weight:700}
+input,select,textarea{
+width:100%;padding:14px;border-radius:12px;
+background:#0e0e0e;border:1px solid #333;color:white;
+font-family:'Vazirmatn',sans-serif;
+}
+textarea{min-height:220px;resize:vertical}
+.buttons{display:flex;gap:10px;flex-wrap:wrap;margin-top:15px}
+button{
+flex:1;min-width:140px;padding:14px;border:none;border-radius:12px;
+cursor:pointer;font-family:'Vazirmatn',sans-serif;font-weight:700;
+}
+.gen{background:var(--gold);color:black}
+.copy{background:#222;color:white}
+pre{
+background:#080808;border-right:5px solid var(--gold);
+padding:15px;border-radius:12px;
+white-space:pre-wrap;word-break:break-word;line-height:2;
+}
+.footer{
+margin-top:30px;
+padding-top:20px;
+border-top:1px solid rgba(212,175,55,.2);
+text-align:center;
+color:#888;
+font-size:14px;
+line-height:2;
+}
+.footer .creator{
+color:var(--gold);
+font-weight:700;
+}
+@media(max-width:600px){
+.buttons{flex-direction:column}
+button{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="panel">
+
+<div class="logo">FARSIAN WAR</div>
+<div class="subtitle">Global Command Center</div>
+
+<label>کشور</label>
+<select id="country">
+<option value="─⊱- 🇮🇷 𝐈𝐑𝐀𝐍 – 𝐓𝐡𝐞 𝐏𝐞𝐫𝐬𝐢𝐚𝐧 𝐏𝐨𝐰𝐞𝐫 ⚔️ – 𝐈𝐑𝐈𝐁 🗞️, 𝐓𝐚𝐬𝐧𝐢𝐦 🗞️, 𝐅𝐚𝐫𝐬 𝐍𝐞𝐰𝐬 🗞️">IRAN</option>
+<option value="─⊱- 🇺🇸 𝐔𝐍𝐈𝐓𝐄𝐃 𝐒𝐓𝐀𝐓𝐄𝐒 – 𝐋𝐚𝐧𝐝 𝐨𝐟 𝐎𝐩𝐩𝐨𝐫𝐭𝐮𝐧𝐢𝐭𝐲 🔥 – 𝐂𝐍𝐍 🗞️, 𝐀𝐁𝐂 🗞️, 𝐍𝐁𝐂 🗞️">UNITED STATES</option>
+<option value="─⊱- 🇮🇱 𝐈𝐒𝐑𝐀𝐄𝐋 – 𝐈𝐫𝐨𝐧 𝐒𝐡𝐢𝐞𝐥𝐝 🛡️ – 𝐓𝐢𝐦𝐞𝐬 𝐨𝐟 𝐈𝐬𝐫𝐚𝐞𝐥 🗞️">ISRAEL</option>
+</select>
+
+<label>بیانیه از طرف</label>
+<input id="author">
+
+<label>تاریخ</label>
+<input id="date">
+
+<label>مکان</label>
+<input id="location">
+
+<label>متن بیانیه</label>
+<textarea id="statement"></textarea>
+
+<div class="buttons">
+<button class="gen" onclick="generateStatement()">تولید بیانیه</button>
+<button class="copy" onclick="copyOutput()">کپی خروجی</button>
+</div>
+
+<h3>📜 پیش‌نمایش خروجی</h3>
+<pre id="output"></pre>
+
+<div class="footer">
+<div class="creator">Created By Ata</div>
+<div>🛰️ FARSIAN WAR IN Telegram</div>
+<div>⚔️ RAMADAN WAR</div>
+<div>🌍 @Farsian_War</div>
+</div>
+
+</div>
+</div>
+
+<script>
+function generateStatement(){
+const tag=document.getElementById('country').value;
+const author=document.getElementById('author').value;
+const date=document.getElementById('date').value;
+const location=document.getElementById('location').value;
+const statement=document.getElementById('statement').value;
+
+const quoted=statement.split('\n').map(line=>'> '+line).join('\n');
+
+document.getElementById('output').textContent=`${tag}
+
+👤 از طرف: ${author}
+📅 تاریخ: ${date}
+📍 مکان: ${location}
+
+━━━━━━━━━━━━━━━━━━
+
+📝 متن بیانیه:
+
+${quoted}`;
+}
+
+function copyOutput(){
+navigator.clipboard.writeText(document.getElementById('output').textContent);
+alert('خروجی کپی شد');
+}
+</script>
+
+</body>
+</html>
